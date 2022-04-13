@@ -11,14 +11,50 @@ class Database:
     def __init__(self):
         pass
 
-    def open_txt():
-        pass
+    def file_exists(name):
+        try:
+            a = open(name, 'rt')
+            a.close()
+        except (FileNotFoundError):
+            return False
+        else:
+            return True
 
-    def sign_up():
-        pass
+    def create_file(name):
+        try: 
+            a = open(name, 'wt+')
+            a.close()
+        except:
+            print('The file was not created due to an Error.')
+        else:
+            Menu.header("File was created successfully.")
 
-    def display_data():
-        pass
+    def sign_up(filename, username, age):
+        try:
+            a = open(filename, 'at')
+        except:
+            print('Error while opening file!')
+        else:
+            try:
+                a.write(f'{username}; {age} \n')
+            except:
+                print('Error trying to store data')
+            else:
+                print('User Registered Successfully!')
+                
+    def display_users(name):
+        try:
+            a = open(name, 'rt')
+        except:
+            print('Error occurred when opening the file!')
+        else:
+            Menu.header('REGISTERED USERS')
+            for line in a:
+                data = line.split(';')
+                data[1] = data[1].replace('\n', '')
+                print(f'{data[0]:<30} {data[1]:>3} anos')
+        finally:
+            a.close()
 
     def clear_database():
         pass 
